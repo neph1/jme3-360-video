@@ -1,0 +1,15 @@
+MaterialDef Simple {
+    MaterialParameters {
+        TextureCubeMap Map
+        Float RotationX
+    }
+    Technique {
+        VertexShader GLSL100 GLSL150:   Shaders/CubeMapToEquiRect.vert
+        FragmentShader GLSL100 GLSL150: Shaders/CubeMapToEquiRect.frag
+
+        WorldParameters {
+            WorldViewProjectionMatrix
+            ViewProjectionMatrix
+            ViewMatrix
+        }
+}
