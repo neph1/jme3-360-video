@@ -35,20 +35,18 @@ public class CustomVideoRecorderAppStateTest extends SimpleApplication {
     
     @Override
     public void simpleInitApp() {
-        EnvironmentCamera envCam = new EnvironmentCamera(1440, Vector3f.ZERO, Image.Format.RGB8);
+        EnvironmentCamera envCam = new EnvironmentCamera(512, Vector3f.ZERO, Image.Format.RGB8);
         Vector3f cameraPosition = new Vector3f(-2.2f, 1.6f, 2.3f);
         envCam.setPosition(cameraPosition);
-        CubeMapToEquirectangular cubeMapToEqui = new CubeMapToEquirectangular(envCam, "./test.mp4", 0.8f, 30, 3840, 2160, FastMath.PI + FastMath.QUARTER_PI);
+        CubeMapToEquirectangular cubeMapToEqui = new CubeMapToEquirectangular(envCam, "./test.mp4", 0.8f, 30, 640, 480, FastMath.PI + FastMath.QUARTER_PI);
         stateManager.attach(envCam);
         stateManager.attach(cubeMapToEqui);
-        
+        renderer.setBackgroundColor(ColorRGBA.Blue);
         setupTestScene(assetManager);
     }
     
     
     private void setupTestScene(AssetManager assetManager){
-        Material m = new Material(getAssetManager(), "MatDefs/CubeMapToEquiRect.j3md");
-        
         Material defMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
         defMat.setColor("Color", ColorRGBA.Blue);
         

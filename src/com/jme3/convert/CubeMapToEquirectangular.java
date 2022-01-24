@@ -9,11 +9,8 @@ import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.BaseAppState;
 import com.jme3.app.state.CustomVideoRecorderAppState;
-import com.jme3.app.state.VideoRecorderAppState;
 import com.jme3.environment.EnvironmentCamera;
-import com.jme3.environment.LightProbeFactory;
 import com.jme3.environment.generation.JobProgressListener;
-import com.jme3.light.LightProbe;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
@@ -22,8 +19,6 @@ import com.jme3.renderer.Camera;
 import com.jme3.renderer.RenderManager;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Node;
-import com.jme3.scene.shape.Box;
 import com.jme3.scene.shape.Quad;
 import com.jme3.shader.VarType;
 import com.jme3.texture.FrameBuffer;
@@ -31,8 +26,6 @@ import com.jme3.texture.Image;
 import com.jme3.texture.Texture;
 import com.jme3.texture.Texture2D;
 import com.jme3.texture.TextureCubeMap;
-import com.jme3.texture.image.ColorSpace;
-import com.jme3.util.BufferUtils;
 import java.io.File;
 
 /**
@@ -44,7 +37,7 @@ public class CubeMapToEquirectangular extends BaseAppState implements JobProgres
     private EnvironmentCamera cubeCam;
     private Geometry renderQuad;
     private ViewPort offView;
-    Texture2D offTex;
+    private Texture2D offTex;
     private String fileName;
     private int frameRate;
     private float quality;
@@ -76,7 +69,6 @@ public class CubeMapToEquirectangular extends BaseAppState implements JobProgres
         
 
         createOffView(app.getRenderManager());
-
         CustomVideoRecorderAppState customRecorder = new CustomVideoRecorderAppState(new File(fileName), quality, frameRate);
         app.getStateManager().attach(customRecorder);
         
@@ -84,7 +76,7 @@ public class CubeMapToEquirectangular extends BaseAppState implements JobProgres
 
     @Override
     public void update(float tpf) {
-        super.update(tpf); //To change body of generated methods, choose Tools | Templates.
+        super.update(tpf);
         renderQuad.updateLogicalState(tpf);
         renderQuad.updateGeometricState();
     }
@@ -92,13 +84,13 @@ public class CubeMapToEquirectangular extends BaseAppState implements JobProgres
     
     @Override
     public void render(RenderManager rm) {
-        super.render(rm); //To change body of generated methods, choose Tools | Templates.
+        super.render(rm);
         
     }
 
     @Override
     public void postRender() {
-        super.postRender(); //To change body of generated methods, choose Tools | Templates.
+        super.postRender();
         cubeCam.snapshot(((SimpleApplication)getApplication()).getRootNode(), this );
     }
     
