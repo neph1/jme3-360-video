@@ -1,0 +1,2 @@
+rootProject.name = 'jme-360-video'
+include 'assets'
